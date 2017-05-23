@@ -1,0 +1,6 @@
+#Files created by IntelliJ or webstorm
+/.idea
+#boewr-components
+/public/libs
+#node-components
+/node_modules
