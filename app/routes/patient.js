@@ -31,6 +31,15 @@ module.exports = function(app) {
     });
 
 
+    app.get('/HIS/patientNotAdd/:status',function (req, res) {
+        console.log(req.params.status);
+        Patient.find({status: req.params.status}).then(function (response) {
+            console.log(response.data);
+            res.send(response);
+        });
+    });
+
+
     //add a patient
     app.post('/HIS/patient',function (req, res, next) {
 

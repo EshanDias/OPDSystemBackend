@@ -29,7 +29,12 @@ const patientSchema = new Schema({
 	},
 	address :{
 		type:String
-	}
+	},
+    status :{
+        type:String,
+		default : 'NotAdded'
+    }
+
 
 });
 
