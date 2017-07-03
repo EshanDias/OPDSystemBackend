@@ -66,6 +66,7 @@ app.use(function (req, res, next) {
 require('./app/routes/questionnaires')(app);
 require('./app/routes/users')(app);
 require('./app/routes/patient')(app);
+require('./app/routes/Queue')(app);
 
 // start app ===============================================
 // startup our app at http://localhost:8000
