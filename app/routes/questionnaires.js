@@ -8,10 +8,8 @@ module.exports = function(app) {
     // =====MyRoutes==============================================
 
     app.post('/api/question', function(req,res) {
-        console.log("Question and answer received");
         var ques = new question(req.body);
         ques.save(function(error) {
-            console.log("Q&A is saved in the DB");
             if (error) {
                 console.error(error);
             }
