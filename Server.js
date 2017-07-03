@@ -62,10 +62,11 @@ app.use(function (req, res, next) {
     next();
 });
 
-// require('./app/routes')(app); // configure our routes
-require('./app/routes/frontend')(app);
+// ALL THE ROUTES
 require('./app/routes/questionnaires')(app);
 require('./app/routes/users')(app);
+require('./app/routes/patient')(app);
+require('./app/routes/Queue')(app);
 
 // start app ===============================================
 // startup our app at http://localhost:8000
