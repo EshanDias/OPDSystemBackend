@@ -1,5 +1,6 @@
 #Files created by IntelliJ or webstorm
 /.idea
+*.iml
 #boewr-components
 /public/libs
 #node-components

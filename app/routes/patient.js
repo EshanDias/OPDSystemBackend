@@ -11,7 +11,6 @@ module.exports = function(app) {
     });
 
     app.get('/HIS/patients/:id',function (req, res) {
-        console.log("id which comes to the backend "+req.params.id);
         Patient.findOne({_id: req.params.id}, function (err, response) {
             if (err) {
                 console.log(err);
