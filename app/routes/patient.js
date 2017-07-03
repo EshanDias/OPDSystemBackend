@@ -10,14 +10,17 @@ module.exports = function(app) {
         });
     });
 
-    //get patient by id
     app.get('/HIS/patients/:id',function (req, res) {
-    //console.log(req.params.id);
-        Patient.findOne({_id: req.params.id}).then(function (response) {
-            res.send(response);
+        console.log("id which comes to the backend "+req.params.id);
+        Patient.findOne({_id: req.params.id}, function (err, response) {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                res.send(response);
+            }
         });
     });
-
 
     //for search
     app.get('/HIS/patient/:hin',function (req, res) {
