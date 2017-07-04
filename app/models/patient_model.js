@@ -7,7 +7,7 @@ const patientSchema = new Schema({
 		type:String,
 		required:[true, 'HIN feild is required']
 	},
-  name :{
+  	name :{
 		type:String,
 		required:[true, 'Name feild is required']
 	},
