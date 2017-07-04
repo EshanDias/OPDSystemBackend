@@ -67,6 +67,7 @@ require('./app/routes/questionnaires')(app);
 require('./app/routes/users')(app);
 require('./app/routes/patient')(app);
 require('./app/routes/Queue')(app);
+require('./app/routes/doctor')(app);
 require('./app/routes/myOPD')(app);
 require('./app/routes/createVisit')(app);
 
