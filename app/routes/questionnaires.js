@@ -1,5 +1,6 @@
 // Get the DB Models Created
 var question = require('../models/questionnaires-model');
+var patient_detail = require('../models/patient_model');
 
 var path = require('path');
 
@@ -17,13 +18,22 @@ module.exports = function(app) {
         res.end();
     });
 
-    app.get('/api/question', function(req,res) {
-        // var id = req.body.HIN;
-        // get the json request with e particular hin and show the questions of the particular patient
-        question.find(function(err,questions) {
+    app.get('/api/question:id', function(req,res) {
+        question.find({HIN: req.params.id}, function(err,questions) {
             if (err)
                 res.send(err);
             res.send(questions);
-        })
+        });
+    });
+
+    app.put('/api/addRemarks',function (req, res) {
+        var id = req.body._id;
+
+        patient_detail.findByIdAndUpdate({_id: id},req.body).then(function() {
+            patient_detail.findOne({_id: id}).then(function(response) {
+                res.send(response);
+            });
+
+        });
     });
 };

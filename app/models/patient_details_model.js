@@ -46,6 +46,10 @@ const PatientDetailsSchema = new Schema({
 
 	BloodPreasure: {
 		type:Number
+	},
+
+	remarks: {
+		type: String
 	}
 });
 
