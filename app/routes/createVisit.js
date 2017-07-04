@@ -1,5 +1,5 @@
-const Visit = require('../Models/patient_details')
-// const Drug = require('../Models/drug')
+const Visit = require('../models/patient_details_model')
+// const Drug = require('../models/drug')
 
 module.exports = function(app) {
 //post a visit

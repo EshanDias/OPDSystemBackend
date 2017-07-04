@@ -1,24 +1,27 @@
-const Patient = require('../models/patient.js');
-const PatientDetails = require('../models/patient_details.js');
-const Doctor = require('../models/doctor.js');
-const DoctorQueue = require('../models/doctor_queue.js');
+const Patient = require('../models/patient_model');
+const PatientDetails = require('../models/patient_details_model');
+const Doctor = require('../models/doctor_model');
+const DoctorQueue = require('../models/doctor_queue_model');
 
 module.exports = function(app) {
 
     app.get('/myPatients/:DoctorName' ,function (req, res, next) {
-        PatientDetails.find({DoctorName:req.params.DoctorName}).then(function (patientDetails) {
+        PatientDetails.find({DoctorName: req.params.DoctorName}).then(function (patientDetails) {
             res.send(patientDetails);
         });
     });
 
+
+
     //get a patient overview
-    app.get('/patient/:id' , (req,res)=>{
-        console.log(req.params.id);
+    app.get('/patientOverview/:hin' , function (req,res){
+        console.log(req.params.hin);
 
-        Patient.findById({_id:req.params.id}).then(patient => {
-            res.json(patient || {});
+        Patient.findOne({HIN: req.params.hin}).then(function(patient) {
+            //res.json(patient || {});
+            res.send(patient);
 
-        }).catch(err => {
+        }).catch(function(err){
             console.error(err);
             res.sendStatus(500);
         });
@@ -26,16 +29,16 @@ module.exports = function(app) {
     });
 
     //Update availability as false
-    app.put('/doctors/:id/hold' , (req,res)=>{
+    app.put('/doctors/:id/hold' , function (req,res) {
 
         req.body={availability:false};
 
         Doctor.findByIdAndUpdate({_id:req.params.id},{$set:req.body}).then(function(){
-            Doctor.findOne({_id:req.params.id},{$set:req.body}).then(doctor =>{
+            Doctor.findOne({_id:req.params.id},{$set:req.body}).then(function(doctor){
                 res.json(doctor);
                 res.sendStatus(200);
             });
-        }).catch(err => {
+        }).catch(function(err){
             console.error(err);
             res.sendStatus(500);
         });
@@ -43,16 +46,16 @@ module.exports = function(app) {
     });
 
     //Update availability as true
-    app.put('/doctors/:id/resume' , (req,res)=>{
+    app.put('/doctors/:id/resume' , function (req,res){
 
         req.body={availability:true};
 
         Doctor.findByIdAndUpdate({_id:req.params.id},{$set:req.body}).then(function(){
-            Doctor.findOne({_id:req.params.id},{$set:req.body}).then(doctor =>{
+            Doctor.findOne({_id:req.params.id},{$set:req.body}).then(function(doctor){
                 res.json(doctor);
                 res.sendStatus(200);
             });
-        }).catch(err => {
+        }).catch(function(err){
             console.error(err);
             res.sendStatus(500);
         });
@@ -60,14 +63,17 @@ module.exports = function(app) {
     });
 
     //get a doctor
-    app.get('/doctor/:id' , (req,res)=>{
+    app.get('/doctor/:id', function(req,res){
+
         console.log(req.params.id);
 
-        Doctor.findById({_id:req.params.id}).then(doctor => {
-            res.json(doctor || {});
+        Doctor.findOne({_id: req.params.id}).then(function(response) {
+            //res.json(doctor || {});
+            console.log("found");
+            res.send(response);
 
-        }).catch(err => {
-            console.error(err);
+        }).then(function (err) {
+            console.error("not found");
             res.sendStatus(500);
         });
 
