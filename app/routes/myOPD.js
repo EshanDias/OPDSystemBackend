@@ -73,6 +73,14 @@ module.exports = function(app) {
 
     });
 
+    app.post('/doctors',function (req, res, next) {
+
+        Doctor.create(req.body).then(function (doctors) {
+            res.send(doctors);
+        });
+    });
+
+
 
     //for search field
     app.get('/patients/:HIN',function (req, res, next) {
